@@ -19,8 +19,8 @@
         <div class="header-content">
           <h1>Бібліотека Книг</h1>
           <p>
-            Інтерактивний каталог, який дозволяє шукати, сортувати та
-            переглядати актуальні дані про книги з Google Books
+            Інтерактивний каталог, який дозволяє шукати, сортувати та переглядати актуальні дані
+            про книги з Google Books
           </p>
         </div>
 
@@ -31,11 +31,11 @@
         </nav>
 
         <div class="controls-container">
-          <select id="episodeSelect" onchange="handleSelectChange()">
+          <select id="episodeSelect">
             <option value="-1">Оберіть книгу</option>
           </select>
 
-          <select id="sortSelect" onchange="handleSort()">
+          <select id="sortSelect">
             <option value="none">Сортувати за...</option>
             <option value="title">Назвою (А–Я)</option>
             <option value="author">Автором (А–Я)</option>
@@ -47,19 +47,59 @@
             type="text"
             id="searchInput"
             placeholder="Введіть назву книги, автора або ISBN..."
-            oninput="handleSearch(event)"
           />
 
-          <button id="resetSearchButton" onclick="handleReset()">
-            Скинути
-          </button>
+          <button id="resetSearchButton">Скинути</button>
 
           <div id="searchCount"></div>
+
+          <button id="themeToggle" class="theme-toggle" type="button">
+            🌙 Тема
+          </button>
         </div>
       </div>
     </header>
 
-    <main id="root" class="container"></main>
+    <main id="home" class="container">
+      <div id="root"></div>
+    </main>
+
+    <section id="about" class="blog-section">
+      <div class="blog-inner">
+        <h2>Наш блог</h2>
+        <p class="blog-subtitle">
+          Ділимося думками про книги, навчання та натхнення.
+        </p>
+
+        <div class="blog-grid">
+          <article class="blog-card">
+            <h3>Як обрати книгу для саморозвитку</h3>
+            <p>
+              Короткий гайд, як шукати книжки, які реально допомагають рухатися вперед, а не просто
+              займають місце на полиці.
+            </p>
+            <span class="blog-meta">Тег: Самоосвіта</span>
+          </article>
+
+          <article class="blog-card">
+            <h3>Чому варто читати українською</h3>
+            <p>
+              Про мову, ідентичність та відчуття, коли впізнаєш себе у текстах українських авторів.
+            </p>
+            <span class="blog-meta">Тег: Українська література</span>
+          </article>
+
+          <article class="blog-card">
+            <h3>5 книжок, з яких варто почати ІТ-шнику</h3>
+            <p>
+              Підбірка для тих, хто хоче поєднати технічні знання з софт-скілами та критичним
+              мисленням.
+            </p>
+            <span class="blog-meta">Тег: IT & книги</span>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <footer class="app-footer" id="contact">
       <div class="footer-content-wrapper">
@@ -116,8 +156,34 @@
       </p>
     </footer>
 
+    <div id="bookModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal">
+        <button class="modal-close" id="modalCloseBtn" aria-label="Закрити">
+          &times;
+        </button>
+
+        <div class="modal-layout">
+          <img
+            id="modalImage"
+            class="modal-image"
+            src=""
+            alt="Обкладинка книги"
+          />
+
+          <div class="modal-text">
+            <h2 id="modalTitle"></h2>
+            <p id="modalAuthors" class="modal-authors"></p>
+            <p id="modalYear" class="modal-year"></p>
+            <p id="modalDescription" class="modal-description"></p>
+
+            <a id="modalLink" class="modal-link" href="#" target="_blank">
+              Відкрити в Google Books
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
-
-    

@@ -1,16 +1,87 @@
+/* ===================================== */
+/* 0. КОЛІРНІ ЗМІННІ ТЕМИ                */
+/* ===================================== */
+
 :root {
   --color-bg-main: #121212;
   --color-bg-container: #222222;
   --color-bg-card: #1e1e1e;
+
   --color-text-primary: #ffffff;
   --color-text-secondary: #bbbbbb;
+
   --color-border-subtle: #333333;
   --color-accent: #a5c5c7;
 }
 
-/* ------------------------------------- */
-/* 1. БАЗОВІ СТИЛІ ТА МАКЕТ */
-/* ------------------------------------- */
+body.light-theme {
+  --color-bg-main: #f5f5f5;
+  --color-bg-container: #ffffff;
+  --color-bg-card: #ffffff;
+
+  --color-text-primary: #222222;
+  --color-text-secondary: #555555;
+
+  --color-border-subtle: #dcdcdc;
+  --color-accent: #008c99;
+}
+
+body.light-theme .controls-container > * {
+  background-color: #ffffff;
+  color: #222222;
+  border: 1px solid var(--color-border-subtle);
+}
+
+body.light-theme #resetSearchButton {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+body.light-theme #resetSearchButton:hover {
+  background-color: #007783;
+}
+
+body.light-theme #themeToggle {
+  background-color: #ffffff;
+  color: #222222;
+  border: 1px solid var(--color-border-subtle);
+}
+
+body.light-theme #themeToggle:hover {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+body.light-theme #searchInput::placeholder {
+  color: #777777;
+}
+
+body.light-theme .episode-item {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .modal {
+  background-color: #ffffff;
+}
+
+body.light-theme .blog-section {
+  background-color: #f0f0f0;
+}
+
+body.light-theme .feedback-form {
+  background-color: #ffffff;
+}
+
+body.light-theme .footer-input,
+body.light-theme .footer-textarea {
+  background-color: #ffffff;
+  color: #222222;
+}
+
+/* ===================================== */
+/* 1. БАЗОВІ СТИЛІ ТА МАКЕТ              */
+/* ===================================== */
 
 * {
   box-sizing: border-box;
@@ -19,16 +90,20 @@
   font-family: 'Montserrat', Arial, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   min-height: 100vh;
-  padding-top: 300px; 
+  padding-top: 300px;
 }
 
-/* ------------------------------------- */
-/* 2. HEADER ТА КЕРУВАННЯ */
-/* ------------------------------------- */
+/* ===================================== */
+/* 2. HEADER ТА КЕРУВАННЯ                */
+/* ===================================== */
 
 .app-header {
   position: fixed;
@@ -39,8 +114,13 @@ body {
   background-color: var(--color-bg-container);
   color: var(--color-text-primary);
   padding: 20px 40px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
   z-index: 10;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.app-header.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .header-inner {
@@ -69,8 +149,6 @@ body {
   color: var(--color-text-secondary);
   font-size: 0.9em;
 }
-
-/* Навігація */
 
 .main-nav {
   margin: 10px 0 15px 0;
@@ -102,7 +180,7 @@ body {
   padding: 0 10px;
   border: 1px solid var(--color-border-subtle);
   border-radius: 4px;
-  background-color: #333333;
+  background-color: var(--color-bg-card);
   color: var(--color-text-primary);
   font-size: 1em;
   height: 40px;
@@ -131,17 +209,43 @@ body {
   background-color: #f9f5fd;
 }
 
-/* ------------------------------------- */
-/* 3. ОСНОВНИЙ КОНТЕЙНЕР ТА КАРТКИ */
-/* ------------------------------------- */
+.theme-toggle,
+#themeToggle {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 0 12px;
+  height: 40px;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle:hover,
+#themeToggle:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg-main);
+}
+
+/* ===================================== */
+/* 3. ОСНОВНИЙ КОНТЕЙНЕР ТА КАРТКИ       */
+/* ===================================== */
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: 1fr;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
 }
 
 .episode-item {
@@ -199,9 +303,9 @@ body {
   order: 2;
 }
 
-/* ------------------------------------- */
-/* 4. КОНТЕЙНЕР ОПИСУ (СКРОЛІНГ) */
-/* ------------------------------------- */
+/* ===================================== */
+/* 4. КОНТЕЙНЕР ОПИСУ (СКРОЛІНГ)         */
+/* ===================================== */
 
 .description-container {
   height: 250px;
@@ -214,14 +318,13 @@ body {
   padding-right: 15px;
 }
 
-/* приховати скролбар */
 .description-container::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
 
 .description-container {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .episode-summary {
@@ -245,9 +348,44 @@ body {
   background-color: var(--color-bg-card);
 }
 
-/* ------------------------------------- */
-/* 5. FOOTER ТА ФОРМА ВІДГУКІВ */
-/* ------------------------------------- */
+/* ===================================== */
+/* 5. КНОПКИ КАРТКИ                      */
+/* ===================================== */
+
+.card-actions {
+  order: 4;
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.card-button {
+  padding: 6px 10px;
+  font-size: 0.8em;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-container);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.card-button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg-main);
+  transform: translateY(-1px);
+}
+
+.card-button--primary {
+  border-color: var(--color-accent);
+}
+
+/* ===================================== */
+/* 6. FOOTER ТА ФОРМА ВІДГУКІВ           */
+/* ===================================== */
 
 .app-footer {
   background-color: var(--color-bg-container);
@@ -264,8 +402,6 @@ body {
   margin: 5px 0;
 }
 
-/* Внутрішній контейнер футера */
-
 .footer-content-wrapper {
   display: flex;
   justify-content: space-between;
@@ -275,8 +411,6 @@ body {
   margin: 0 auto 30px;
   text-align: left;
 }
-
-/* Ліва колонка — контакти */
 
 .footer-contact {
   flex: 1;
@@ -311,15 +445,11 @@ body {
   text-decoration: none;
 }
 
-/* Права колонка — обгортка форми */
-
 .footer-form-wrapper {
   flex: 1.2;
   min-width: 300px;
   max-width: 460px;
 }
-
-/* Форма відгуку */
 
 .feedback-form {
   width: 100%;
@@ -395,9 +525,159 @@ body {
   box-shadow: 0 1px 0 #008c99;
 }
 
-/* ------------------------------------- */
-/* 6. АДАПТИВНІСТЬ ФУТЕРА */
-/* ------------------------------------- */
+/* ===================================== */
+/* 7. МОДАЛЬНЕ ВІКНО КНИГИ               */
+/* ===================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-backdrop.is-open {
+  display: flex;
+}
+
+.modal {
+  background-color: var(--color-bg-container);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 800px;
+  width: 95%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.modal-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.modal-image {
+  width: 180px;
+  min-width: 180px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #000000;
+}
+
+.modal-text {
+  flex: 1;
+}
+
+.modal-text h2 {
+  margin: 0 0 10px;
+  color: var(--color-text-primary);
+}
+
+.modal-authors,
+.modal-year {
+  margin: 0 0 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+}
+
+.modal-description {
+  margin: 10px 0 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.modal-link {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: var(--color-bg-main);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.modal-link:hover {
+  opacity: 0.9;
+}
+
+/* ===================================== */
+/* 8. РОЗДІЛ “НАШ БЛОГ”                  */
+/* ===================================== */
+
+.blog-section {
+  padding: 40px 20px 30px;
+  background-color: #151515;
+  margin-top: 20px;
+}
+
+.blog-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-inner h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: var(--color-text-primary);
+}
+
+.blog-subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: 25px;
+  font-size: 0.95em;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.blog-card {
+  background-color: var(--color-bg-card);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+.blog-card h3 {
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+  font-size: 1.1em;
+}
+
+.blog-card p {
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+  margin-bottom: 12px;
+}
+
+.blog-meta {
+  font-size: 0.8em;
+  color: var(--color-accent);
+}
+
+/* ===================================== */
+/* 9. АДАПТИВНІСТЬ                       */
+/* ===================================== */
 
 @media (max-width: 768px) {
   .footer-content-wrapper {
@@ -414,11 +694,11 @@ body {
   .footer-form-wrapper {
     width: 100%;
   }
-}
 
-/* ------------------------------------- */
-/* 7. АДАПТИВНІСТЬ ХЕДЕРА/КОНТРОЛІВ */
-/* ------------------------------------- */
+  .app-header {
+    padding: 20px;
+  }
+}
 
 @media (max-width: 650px) {
   .controls-container {
@@ -431,7 +711,17 @@ body {
     width: 100%;
   }
 
-  .app-header {
-    padding: 20px;
+  .modal-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-image {
+    width: 160px;
+    height: 230px;
+  }
+
+  .modal {
+    padding: 16px;
   }
 }
