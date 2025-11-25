@@ -39,6 +39,7 @@ body.light-theme #resetSearchButton {
 
 body.light-theme #resetSearchButton:hover {
   background-color: #007783;
+  color: #ffffff;
 }
 
 body.light-theme #themeToggle {
@@ -98,11 +99,11 @@ body {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   min-height: 100vh;
-  padding-top: 300px;
+  padding-top: 180px; 
 }
 
 /* ===================================== */
-/* 2. HEADER ТА КЕРУВАННЯ                */
+/* 2. HEADER        */
 /* ===================================== */
 
 .app-header {
@@ -113,66 +114,106 @@ body {
 
   background-color: var(--color-bg-container);
   color: var(--color-text-primary);
-  padding: 20px 40px;
+
+  padding: 8px 0 10px;
   box-shadow: none;
+
   z-index: 10;
   transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .app-header.scrolled {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .header-inner {
-  max-width: 1200px;
   width: 100%;
+  max-width: min(100%, 1100px);
   margin: 0 auto;
+  padding-left: clamp(10px, 3vw, 40px);
+  padding-right: clamp(10px, 3vw, 40px);
+}
 
+.app-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 
-.header-content {
-  text-align: center;
-  margin-bottom: 15px;
+.app-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.app-header h1 {
-  margin: 0 0 5px;
-  font-size: 2.2em;
-  color: var(--color-accent);
+.app-logo-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(0, 140, 153, 0.25);
 }
 
-.app-header p {
-  margin: 0 0 15px;
+.app-title-group h1 {
+  margin: 0;
+  font-size: 1.6em;
+  color: var(--color-text-primary);
+}
+
+.app-title-group p {
+  margin: 2px 0 0;
+  font-size: 0.85em;
   color: var(--color-text-secondary);
-  font-size: 0.9em;
 }
 
 .main-nav {
-  margin: 10px 0 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
 }
 
 .main-nav a {
   color: var(--color-text-primary);
   text-decoration: none;
-  padding: 0 15px;
-  font-size: 1.1em;
-  transition: color 0.2s;
+  font-size: 0.95em;
+  padding: 4px 0;
+  position: relative;
 }
 
-.main-nav a:hover {
-  color: var(--color-accent);
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.2s ease;
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
+.filters-card {
+  margin-top: 10px;
+  padding: 10px clamp(10px, 3vw, 30px);
+
+  background-color: var(--color-bg-main);
+  border-radius: 12px;
+  border: 1px solid var(--color-border-subtle);
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
 }
 
 .controls-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
   width: 100%;
 }
 
@@ -182,31 +223,35 @@ body {
   border-radius: 4px;
   background-color: var(--color-bg-card);
   color: var(--color-text-primary);
-  font-size: 1em;
+  font-size: 0.95em;
   height: 40px;
 }
 
 #searchInput {
-  max-width: 300px;
+  max-width: 260px;
 }
 
 #searchCount {
+  border: none;
+  background: transparent;
   color: var(--color-accent);
   font-weight: bold;
   height: 40px;
   line-height: 40px;
+  padding: 0 4px;
 }
 
 #resetSearchButton {
   cursor: pointer;
   background-color: var(--color-accent);
-  color: var(--color-bg-container);
-  font-weight: bold;
-  transition: background-color 0.2s;
+  color: var(--color-bg-main);
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 #resetSearchButton:hover {
   background-color: #f9f5fd;
+  color: #222;
 }
 
 .theme-toggle,
@@ -237,8 +282,8 @@ body {
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  padding: 20px;
-  max-width: 1200px;
+  padding: 20px clamp(10px, 3vw, 40px);
+  max-width: min(100%, 1100px);
   margin: 0 auto;
 }
 
@@ -629,7 +674,7 @@ body {
 }
 
 .blog-inner {
-  max-width: 1200px;
+  max-width: min(100%, 1100px);
   margin: 0 auto;
 }
 
@@ -680,6 +725,56 @@ body {
 /* ===================================== */
 
 @media (max-width: 768px) {
+ 
+  body {
+    padding-top: 0;
+  }
+
+  .app-header {
+    position: static;
+    padding: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .app-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .app-title-group h1 {
+    font-size: 1.3em;
+  }
+
+  .app-title-group p {
+    display: none;
+  }
+
+  .main-nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .filters-card {
+    margin-top: 8px;
+    padding: 10px 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .controls-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-container > * {
+    width: 100%;
+  }
+
+  #searchCount {
+    text-align: right;
+  }
+
   .footer-content-wrapper {
     flex-direction: column;
     align-items: center;
@@ -694,23 +789,9 @@ body {
   .footer-form-wrapper {
     width: 100%;
   }
-
-  .app-header {
-    padding: 20px;
-  }
 }
 
 @media (max-width: 650px) {
-  .controls-container {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .controls-container > * {
-    max-width: 100%;
-    width: 100%;
-  }
-
   .modal-layout {
     flex-direction: column;
     align-items: center;
@@ -724,4 +805,22 @@ body {
   .modal {
     padding: 16px;
   }
+}
+
+/* 1. Атрибутний селектор:*/
+.controls-container input[type="text"] {
+  border-width: 2px;
+  border-color: var(--color-border-subtle);
+  border-radius: 6px;
+}
+
+/* 2. Сусідній селектор: підзаголовок блогу*/
+.blog-inner h2 + .blog-subtitle {
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* 3. Комбінований сусідній селектор: кнопка "Скинути" */
+.controls-container input[type="text"] + #resetSearchButton {
+  margin-left: 4px;
 }
