@@ -68,6 +68,7 @@ async function setup() {
   initModalLogic();
   initThemeToggle();
   initHeaderShadowOnScroll();
+  initGallery(); 
 }
 
 function makePageForBooks(bookList, updateSelect = true) {
@@ -318,7 +319,10 @@ function openBookModalFromCard(card) {
   }
 
   const link = document.getElementById("modalLink");
-  link.href = data.link || "#";
+  if (link) {
+    link.href = data.link || "#";
+    link.style.display = "inline-block"; // показуємо кнопку для книг
+  }
 
   document.body.style.overflow = "hidden";
 }
