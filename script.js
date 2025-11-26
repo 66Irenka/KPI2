@@ -472,4 +472,23 @@ function initHeaderShadowOnScroll() {
   updateShadow();
 }
 
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    scrollBtn.style.opacity = "1";
+    scrollBtn.style.pointerEvents = "auto";
+  } else {
+    scrollBtn.style.opacity = "0";
+    scrollBtn.style.pointerEvents = "none";
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
 window.onload = setup;
