@@ -461,7 +461,7 @@ function initHeaderShadowOnScroll() {
   if (!header) return;
 
   function updateShadow() {
-    if (window.scrollY > 10) {
+    if (window.scrollY > 18) {
       header.classList.add("scrolled");
     } else {
       header.classList.remove("scrolled");

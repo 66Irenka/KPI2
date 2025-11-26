@@ -1052,8 +1052,7 @@ body.light-theme .social-icon:hover {
   border: 1px solid var(--color-border-subtle);
   overflow: hidden;
   text-align: center;
-
-    box-shadow:
+  box-shadow:
     0 6px 12px rgba(0, 0, 0, 0.45),         
     0 0 18px rgba(255, 255, 255, 0.05) inset,
     4px 0 12px rgba(0, 0, 0, 0.3);           
